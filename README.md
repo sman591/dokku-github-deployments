@@ -13,12 +13,12 @@ $ dokku plugin:install https://github.com/sman591/dokku-github-deployments.git
 2. Set the necessary config for each app
 
 ```
-$ dokku config:set $APP GITHUB_TOKEN=my_github_token
-$ dokku config:set $APP GITHUB_REPO=my_user/my_repo
+$ dokku config:set --no-restart $APP GITHUB_TOKEN=my_github_token
+$ dokku config:set --no-restart $APP GITHUB_REPO=my_user/my_repo
 ```
 
 If the environment is different than `production`, specify it:
 
 ```
-$ dokku config:set $APP GITHUB_ENV=my_environment
+$ dokku config:set --no-restart $APP GITHUB_ENV=my_environment
 ```
