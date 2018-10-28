@@ -1,3 +1,5 @@
+require 'active_support'
+require 'active_support/core_ext'
 require 'octokit'
 
 def main
@@ -7,7 +9,7 @@ def main
   case command
   when "deploy_status"
     state = ARGV[1]
-    if state.empty?
+    if state.blank?
       puts "Usage: github.rb deploy_status STATE"
       puts "       STATE is one of the states from the GitHub deployments API (success, failure, etc)"
       puts "       Will create a deployment if one doesn't already exist"
@@ -41,7 +43,7 @@ class GitHub
   private
 
   def env(variable)
-    ENV[variable] || raise("Error: #{variable} not set!")
+    ENV[variable].presence || raise("Error: #{variable} not set!")
   end
 
   def access_token
