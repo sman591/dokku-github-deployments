@@ -16,7 +16,6 @@ function setup() {
 }
 
 function set_envs() {
-  APP="$1"
   GITHUB_REPO=$(dokku config:get "$APP" GITHUB_REPO || echo)
   GITHUB_TOKEN=$(dokku config:get "$APP" GITHUB_TOKEN || echo)
   GIT_REV=$(dokku config:get "$APP" GIT_REV || echo "$GIT_REV")
