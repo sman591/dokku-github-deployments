@@ -2,6 +2,11 @@
 
 Send the status of deployments back to GitHub via the [GitHub Deployments API](https://developer.github.com/v3/repos/deployments/).
 
+* When an app deployment starts, the `in_progress` status will be sent
+* When an app deployment finishes, the `success` status will be sent
+
+Whenever a status is sent, it will attempt find an existing deployment matching the given environment and Git SHA. If a deployment isn't found, it will create one.
+
 ## Installation
 
 1. Install the plugin
