@@ -25,6 +25,11 @@ function set_envs() {
     dokku config:get "$APP" RACK_ENV ||
     echo 'production'
   )
+
+  if [[ ! $GIT_REV ]]; then
+    echo "       WARNING: \$GIT_REV is not available - falling back to parsing git commit hash from git log"
+    GIT_REV=$(cd $DOKKU_ROOT/$APP && git log -n 1 --pretty=format:"%H" 2>/dev/null)
+  fi
 }
 
 function docker_run() {
