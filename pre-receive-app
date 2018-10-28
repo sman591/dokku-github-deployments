@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 
+cd $(dirname "$0")
 source lib/utils.sh
 
 if [[ $GITHUB_TOKEN ]]; then
