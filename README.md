@@ -1,6 +1,6 @@
 # dokku-github-deployments
 
-Send the status of deployments back to GitHub via the [GitHub Deployments API](https://developer.github.com/v3/repos/deployments/).
+Follows deployment progress of [Dokku](https://github.com/dokku/dokku) apps and sends statuses to GitHub via the [GitHub Deployments API](https://developer.github.com/v3/repos/deployments/).
 
 * When an app deployment starts, the `in_progress` status will be sent
 * When an app deployment finishes, the `success` status will be sent
@@ -16,6 +16,8 @@ $ dokku plugin:install https://github.com/sman591/dokku-github-deployments.git
 ```
 
 2. Set the necessary config for each app
+
+_Create a GitHub [Personal access token](https://github.com/settings/tokens) with the `repo_deployment` permission._
 
 ```
 $ dokku config:set --no-restart $APP GITHUB_TOKEN=my_github_token
