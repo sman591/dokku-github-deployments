@@ -4,6 +4,8 @@ set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
 cd $(dirname "$0")
 source lib/utils.sh
 
+set_envs
+
 if [[ $GITHUB_TOKEN ]]; then
   echo "-----> Updating deployment status on GitHub ..."
 

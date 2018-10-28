@@ -6,17 +6,6 @@ RUBY_VERSION=$(cat "$PLUGIN_ROOT/.ruby-version" | cut -d '.' -f 1,2)
 DOCKER_IMAGE="ruby:$RUBY_VERSION"
 BUNDLE_PATH="/app/vendor/bundle"
 
-APP="$1"
-GITHUB_REPO=$(dokku config:get "$APP" GITHUB_REPO || echo)
-GITHUB_TOKEN=$(dokku config:get "$APP" GITHUB_TOKEN || echo)
-GIT_REV=$(dokku config:get "$APP" GIT_REV || echo "$GIT_REV")
-ENVIRONMENT=$(
-  dokku config:get "$APP" GITHUB_ENV ||
-  dokku config:get "$APP" RAILS_ENV ||
-  dokku config:get "$APP" RACK_ENV ||
-  echo 'production'
-)
-
 function setup() {
   docker run --rm \
     -e "BUNDLE_PATH=$BUNDLE_PATH" \
@@ -24,6 +13,19 @@ function setup() {
     -w /app \
     "$DOCKER_IMAGE" \
     bundle install
+}
+
+function set_envs() {
+  APP="$1"
+  GITHUB_REPO=$(dokku config:get "$APP" GITHUB_REPO || echo)
+  GITHUB_TOKEN=$(dokku config:get "$APP" GITHUB_TOKEN || echo)
+  GIT_REV=$(dokku config:get "$APP" GIT_REV || echo "$GIT_REV")
+  ENVIRONMENT=$(
+    dokku config:get "$APP" GITHUB_ENV ||
+    dokku config:get "$APP" RAILS_ENV ||
+    dokku config:get "$APP" RACK_ENV ||
+    echo 'production'
+  )
 }
 
 function docker_run() {
