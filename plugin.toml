@@ -1,0 +1,5 @@
+[plugin]
+description = "github deployments integration"
+version = "0.1.0"
+[plugin.config]
+testing = "true"

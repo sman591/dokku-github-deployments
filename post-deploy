@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eo pipefail; [[ $DOKKU_TRACE ]] && set -x
+
+source lib/utils.sh
+
+if [[ $GITHUB_TOKEN ]]; then
+  echo "-----> Updating deployment status on GitHub ..."
+
+  docker_run deploy_status success
+fi
